@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 typedef struct Tarea{
 int TareaID;//Numérico autoincremental comenzando en 1000
 char *Descripcion; //
@@ -25,7 +26,9 @@ void insertarNodo(tNodo **start,tNodo *nNodo){
 
 int main(){
     
-    int id=1000;
+    int id=1000,tiempo;
+    char descrip[40];
+
     tNodo *start;
     tNodo * tareaR(){
         return NULL;
@@ -35,6 +38,27 @@ int main(){
     }
 
     start = tareaP();
+
+    
+
+    int agreagarTarea=1;
+
+    while (agreagarTarea == 1)
+    {
+        printf("ingrese la descripcion de la tarea pendiente:");
+        scanf("%s",&descrip);
+
+        printf("ingrese la duracion de la tarea:");
+        scanf("%d",&tiempo);
+
+        tNodo * Nodo = creaNodo(id,descrip,tiempo);
+        insertarNodo(start,Nodo);
+
+        printf("ingresar 1 para agregar mas tareas o 0 para finalizar");
+        id++;
+        scanf("%d",&agreagarTarea);
+    }
+    
 
     return 0;
 }
