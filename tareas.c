@@ -35,6 +35,7 @@ tNodo  * listaVacia();
 tNodo* buscaPalabra(tNodo *start,char*transferido);
 tNodo * quitarNodo(tNodo **start,int id);
 void leerListas(tNodo * start,tNodo *realizada);
+void buscarPorId(int num,tNodo ** pend,tNodo **reali);
 
 int main(){
     
@@ -95,6 +96,12 @@ int main(){
     }
 
     leerListas(start,relizada);
+
+    int numero;
+    printf("ingrese el id buscado");
+    scanf("%d",&numero);
+
+    buscarPorId(numero,&start,&relizada);
     
 
     return 0;
@@ -163,6 +170,37 @@ void leerListas(tNodo *start,tNodo *realizada){
     {
         printf("tarea: %s  duracion:%d  id:%d\n",aux2->T.Descripcion,aux2->T.Duracion,aux2->T.TareaID);
         aux2 = aux2->Siguiente;
+    }   
+}
+void buscarPorId(int num,tNodo **pend,tNodo **reali){
+    tNodo *lista1 = (*pend);
+    tNodo *lista2 = (*reali);
+
+    while (lista1 != NULL && lista1->T.TareaID != num)
+    {
+        lista1 = lista1->Siguiente;
+
+    }
+
+    if (lista1 != NULL)
+    {
+        printf("tarea encontrada en lista de pendientes\n");
+        printf("Tarea Id: %d Tarea:%s  Duracion:%d\n",lista1->T.TareaID,lista1->T.Descripcion,lista1->T.Duracion);
+    }
+
+    while (lista2 != NULL && lista2->T.TareaID != num)
+    {
+        lista2 = lista2->Siguiente;
     }
     
+    if (lista2 !=NULL)
+    {
+        printf("tarea encontrada en lista de realizadas\n");
+        printf("Tarea Id: %d Tarea:%s  Duracion:%d\n",lista2->T.TareaID,lista2->T.Descripcion,lista2->T.Duracion);
+    }
+
+    if (lista1 == NULL && lista2 == NULL)
+    {
+        printf("la tarea con ese id no existe\n");
+    }
 }
